@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Vue Project</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<style>
+    .box{
+        padding: 100px 0;
+        width: 400px;
+        text-align: center;
+        background: #ddd;
+        margin:20px;
+        display: inline-block;
+    }
+</style>
+<body>
+    <div id="app">
+        <button @click = "showBooks">Show Books</button>
+        <button @click = "hideBooks">Hide Books</button>
+        <!-- attribute binding -->
+        <!-- <h3 v-if="wantbooks"><a :href="url">best website ever</h3> -->
+        <ul>
+            <li v-for="book in books">
+                <div class = "box">
+                    <!-- image binding by :alt = "(image name)" and src -->
+                    <h3>{{book.title}} is written by {{book.author}}, when that person was {{book.age}} years old.</h3>
+                </div>
+            </li>
+        </ul>
+        <!-- <button @click = "changeTitle('Thunderbringer')">Change surname</button> -->
+    <!-- mouse events
+    <div class="box" @mouseover="handleEvent">mouseover</div>
+    <div class="box" @mouseleave="handleEvent">mouselevel</div>
+    <div class="box" @dblclick="handleEvent">doubleclick</div> -->
+    <div class="box" @mousemove="handleMouseMove">
+        position - {{x}} - {{y}}
+    </div>
+</div>
+    <script src = "js/main.js"></script>
+</body>
+</html>
