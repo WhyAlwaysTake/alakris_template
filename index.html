@@ -6,40 +6,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First Vue Project</title>
     <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
-<style>
-    .box{
-        padding: 100px 0;
-        width: 400px;
-        text-align: center;
-        background: #ddd;
-        margin:20px;
-        display: inline-block;
-    }
-</style>
-<body>
-    <div id="app">
-        <button @click = "showBooks">Show Books</button>
-        <button @click = "hideBooks">Hide Books</button>
-        <!-- attribute binding -->
-        <!-- <h3 v-if="wantbooks"><a :href="url">best website ever</h3> -->
-        <ul>
-            <li v-for="book in books">
-                <div class = "box">
-                    <!-- image binding by :alt = "(image name)" and src -->
-                    <h3>{{book.title}} is written by {{book.author}}, when that person was {{book.age}} years old.</h3>
+<div id = "body">
+    <div id = "main">
+        <div id = "header">
+            <img src="./Resources/logo.jpg" style=" height: 25px; width: 241px;">
+            <label id = "headerLabel" v-for="item in header" :key="item">{{item}}</label>
+            <div id = "headerLans">
+                <label id = "headerLan" v-for="lan in header_lan" :key="lan" :style="getHeaderLanStyle(lan)" @click = "changeLan(lan)">{{lan}}</label>
+            </div>
+            <button id = "headerButton" @click = "changePage(!page)">{{demo}}</button>
+        </div>
+        <div id = "center" v-if="page">
+            <div id = "centerRight">
+                <label id = "centerLabel">{{center_headline}}</label></br>
+                <div id = "centerList">
+                    
+                    <label id = "centerListLabel" v-for="list in center">{{list}}</br></label>
                 </div>
-            </li>
-        </ul>
-        <!-- <button @click = "changeTitle('Thunderbringer')">Change surname</button> -->
-    <!-- mouse events
-    <div class="box" @mouseover="handleEvent">mouseover</div>
-    <div class="box" @mouseleave="handleEvent">mouselevel</div>
-    <div class="box" @dblclick="handleEvent">doubleclick</div> -->
-    <div class="box" @mousemove="handleMouseMove">
-        position - {{x}} - {{y}}
+                <button id = "centerButton">{{demo}}</button>
+            </div>
+            <div id="centerLeft">
+                <img src="./Resources/main.jpg">
+            </div>
+        </div>
+        <div id = "bottom" v-if="page">
+            <div id = "bottomTop">
+                <label id = "bottomTopHeadline">{{bottom_headline}}</label>
+                <label id = "bottomTopLabel">{{bottom_label}}</label>
+            </div>
+            <div id = "bottomContent">
+                <div id = bottomContentRow v-for="[key, value] in bottom_content">
+                    <label id = "bottomContentLabel">{{key}}</label>
+                    <p id = "bottomContentP">{{value}}</p>
+                    <label id = "bottomContentMore">{{bottom_more}}</label>
+                </div>
+            </div>
+        </div>
+        <div id = "top" v-if="!page">
+            <div id = "topRight">
+                <label id = "topLabel">{{top_headline}}</label></br>
+                <label id = "topList">{{top}}</br></label>
+                <button id = "topButton">{{top_demo}}</button>
+            </div>
+            <div id = "topLeft">
+                <img src="./Resources/top.png">
+            </div>
+        </div>
+        <div id = "rows" v-if="!page">
+            <div id = "rowsRow">
+                <div id = "rowsRow1" v-for = "[key, value] in row1">
+                    <div id = "rowsRowRight">
+                    </div>
+                    <div id = "rowsRowLeft">
+                        <label id = "rowsRowKey">{{key}}</label>
+                        <div id = "rowsRowLeftBottom">
+                            <div id = "rowsRowLine"></div>
+                            <label id = "rowsRowValue">{{value}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "rowsRow">
+                <div id = "rowsRow2" v-for = "[key, value] in row2">
+                    <label id = "rowsRowKey">{{key}}</label>
+                    <label id = "rowsRowValue">{{value}}</label>
+                </div>
+            </div>
+            <div id = "rowsRow">
+                <div id = "rowsRow3" v-for = "[key, value] in row3">
+                    <label id = "rowsRowKey">{{key}}</label>
+                    <label id = "rowsRowValue">{{value}}</label>
+                </div>
+            </div>
+        </div>
+        <div id = "photos" v-if="!page">
+
+            <div id = "photo"><img src = "./Resources/photo1.jpg" id="image"></div>    
+            <div id = "photo"><img src = "./Resources/photo2.jpg" id="image"></div>    
+            <div id = "photo"><img src = "./Resources/photo3.jpg" id="image"></div>    
+        </div>
+        <div id = "mac" v-if="!page">
+            <div id = "macLeft">
+                <label id = "macLeftLabel">{{mac_label}}</label>
+                <button id = "centerButton">{{demo}}</button>
+            </div>
+            <div id = "macRight">
+                <img src="./Resources/mac.png" style="width: 316px; height: 187.333px; flex-shrink: 0;">
+                <div id = "macRightElipse"></div>
+            </div>
+        </div>
+        <div id = "bottom" v-if="!page">
+            <div id = "bottomTop">
+                <label id = "bottomTopHeadline">{{bottom2_headline}}</label>
+                <label id = "bottomTopLabel">{{bottom2_label}}</label>
+            </div>
+            <div id = "bottomContent">
+                    <div id = bottomContentRow2 v-for = "item in bottom2_content">
+                        <p id = "bottomContentP">{{item}}</p>
+                    </div>
+            
+            </div></br>
+            <div id = "bottomContent">
+                    <div id = bottomContentRow2 v-for = "item in bottom2_content2">
+                        <p id = "bottomContentP">{{item}}</p>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <div id = "questions" v-if = "!page">
+            <div id = "questionsTop">
+                <label id = "questionsTopHeadLine">{{questions_headline}}</label>
+                <label id = "questionsTopLabel">{{questions_label}}</label>
+            </div>
+            <div id = "questionsMain">
+                <div id = "question" v-for="([q, a], index) in questions_content">
+                    <div id = "questionLine"></div>
+                    <label @click = "openQuestion(index)" id = "questionQ">{{q}}</label>
+                    <label @click = "openQuestion(index)" id = "questionSign" v-if="openedQ != index">+</label>
+                    <label @click = "openQuestion(index)" id = "questionSign" v-else>-</label>
+                    <div id = "answer"v-if="openedQ == index">
+                        <label id = "questionA">{{a}}</label>
+                    </div>
+                </div>
+                <div id = "questionLine"></div>
+            </div>
+        </div>
+
+    <div id = "footer">
+        <div id = "footerMain">
+            <img src="./Resources/logo.jpg" style=" height: 25px; width: 241px; ">
+            <div id = "footerMainContent">
+                <div id = "footerMainContentRow" v-for="[key, arr] in footer_content">
+                    <label id = "footerMainContentLabel">{{key}}</br></label>
+                    <label id = "footerMainContentList" v-for="list in arr">{{list}}</br></label>
+                </div>            
+            </div>
+        </div>
+        <div id = "footerBottom">
+            <label id="footerBottomLabel" v-for="label in footer_bottom">{{label}}</label>
+        </div>
     </div>
-</div>
     <script src = "js/main.js"></script>
-</body>
+</div>
 </html>
